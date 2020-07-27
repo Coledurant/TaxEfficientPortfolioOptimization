@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <body>
+
+    <style media="screen">
+      body {
+        font-family: "Courier New", Courier, monospace;
+
+      }
+      .modebar-group {
+        opacity: 0 !important
+      }
+
+      .container-as {
+        position: fixed;
+        top: 1%;
+        left: 1%;
+        z-index: 3;
+         }
+        .btn {
+         outline: 0;
+         display: inline-flex;
+         align-items: center;
+         justify-content: space-between;
+         background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
+         width: 200px;
+         border: 0;
+         border-radius: 4px;
+         box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+         box-sizing: border-box;
+         padding: 16px 20px;
+         color: #fff;
+         font-size: 12px;
+         font-weight: 600;
+         letter-spacing: 1.2px;
+         text-transform: uppercase;
+         overflow: hidden;
+         cursor: pointer;
+        }
+        .btn:focus .dropdown, .btn:active .dropdown {
+         transform: translate(0, 20px);
+         opacity: 1;
+         visibility: visible;
+        }
+        .btn .material-icons {
+         border-radius: 100%;
+         animation: ripple 0.6s linear infinite;
+        }
+        .btn .dropdown {
+         position: absolute;
+         top: 100%;
+         left: 0;
+         background: #fff;
+         width: 100%;
+         border-radius: 4px;
+         box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+         text-align: left;
+         opacity: 0;
+         visibility: hidden;
+         transition: 0.3s ease;
+        }
+        .btn .dropdown:before {
+         content: '';
+         position: absolute;
+         top: -6px;
+         left: 20px;
+         width: 0;
+         height: 0;
+         box-shadow: 2px -2px 6px rgba(0, 0, 0, .05);
+         border-top: 6px solid #fff;
+         border-right: 6px solid #fff;
+         border-bottom: 6px solid transparent;
+         border-left: 6px solid transparent;
+         transform: rotate(-45deg);
+         mix-blend-mode: multiple;
+        }
+        .btn .dropdown li {
+         z-index: 1;
+         position: relative;
+         background: #fff;
+         padding: 0 20px;
+         color: #666;
+        }
+        .btn .dropdown li.active {
+         color: #5380f7;
+        }
+        .btn .dropdown li:first-child {
+         border-radius: 4px 4px 0 0;
+        }
+        .btn .dropdown li:last-child {
+         border-radius: 0 0 4px 4px;
+        }
+        .btn .dropdown li:last-child a {
+         border-bottom: 0;
+        }
+        .btn .dropdown a {
+         display: block;
+         border-bottom: 1px solid rgba(0, 0, 0, .05);
+         padding: 16px 0;
+         color: inherit;
+         font-size: 10px;
+         text-decoration: none;
+        }
+        @keyframes ripple {
+         0% {
+           box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.1), 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1);
+        }
+         100% {
+           box-shadow: 0 0 0 20px rgba(255, 255, 255, 0.1), 0 0 0 40px rgba(255, 255, 255, 0.1), 0 0 0 60px rgba(255, 255, 255, 0.1), 0 0 0 80px rgba(255, 255, 255, 0);
+        }
+        }
+    </style>
+
+
+
+
+  <body>
+
+    <div class="container-as">
+      <button class="btn">
+        <i class="material-icons"></i>
+        <span>Menu</span>
+        <ul class="dropdown">
+          <li class="active">
+            <a href="/investor">Investor</a>
+          </li>
+          <li>
+            <a href="#">Change Password</a>
+          </li>
+          <li>
+            <a href="#">Help</a>
+          </li>
+          <li>
+            <a href="/signout">Log Out</a>
+          </li>
+        </ul>
+      </button>
+    </div>
+
+
+    <div style="height:50px;padding:2%;margin:2%;margin-top:0;text-align:center;color:black;" class="header">
+      <h1>Portfolio Home</h1>
+    </div>
+
+    <br>
+    <br>
+
+
+    <h6 style="text-align:center">Asset Allocation By Size and Colored by Return</h6>
+
+    <div style="height:800px;overflow:hidden">
+      {{ portfolio_weighting_pie_div|safe }}
+    </div>
+
+
+
+
+
+
+
+    <div class="container">
+      <div style="width=100%" class="row">
+        <div style="text-align:center" class="col-1">
+          <h6 style="text-align:center">Assets</h6>
+        </div>
+        <div class="col-3">
+        </div>
+        <div style="text-align:center;" class="col-4">
+          <h6 style="text-align:center;padding-left:2%">Target Allocation</h6>
+        </div>
+        <div style="text-align:center;" class="col-4">
+          <h6 style="text-align:right;padding-left:2%">Current Allocation</h6>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div style="">
+      {{ table_optimal_weight_fig|safe }}
+    </div>
+
+    <div style="">
+      {{ rets_over_time|safe }}
+    </div>
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+    var bottomBar = document.querySelector(".bottom-bar");
+    var content = document.querySelector(".content");
+    var collapsed = true;
+    switchSize = () => {
+    if( collapsed ){
+      content.classList.remove("collapsed");
+      content.classList.add("expanded");
+    }else{
+      content.classList.remove("expanded");
+      content.classList.add("collapsed");
+    }
+    collapsed = !collapsed;
+    }
+
+    bottomBar.addEventListener("click", switchSize)
+    </script>
+
+  </body>
+</html>

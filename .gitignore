@@ -1,0 +1,8 @@
+
+/env
+
+config.ini
+
+__pycache__
+
+pickled_models/
